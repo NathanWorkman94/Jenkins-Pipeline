@@ -15,6 +15,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                echo 'TESTING IF WEBHOOK WORKS'
                 echo 'unit tests'
                 echo 'integration tests'
             }
