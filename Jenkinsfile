@@ -21,7 +21,7 @@ pipeline {
                 echo 'Fetching source code from $DIRECTORY_PATH'
                 
                 // Example of in real scenario how I would clean previous build outputs, compile the source code and package it
-                echo 'sh 'mvn clean package -DskipTests''
+                echo 'sh \'mvn clean package -DskipTests\''
                 
                 echo 'Build completed successfully, artifact is packaged'
             }
