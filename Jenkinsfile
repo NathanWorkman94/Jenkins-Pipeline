@@ -65,21 +65,21 @@ pipeline {
                 echo 'zap-cli quick-scan --self-contained --target http://mycoolwebsitelinkwouldgohere.com'
                 
                 echo 'Security scan completed, check OWASP ZAP results'
-
-                post {
-                always {
-                    echo 'Sending notification email for Security Scan...'
-                    emailext (
-                        to: 'nathanworkman94@gmail.com',
-                        subject: "Jenkins Notification: ${env.JOB_NAME} - ${env.BUILD_NUMBER} - Security Scan Result",
-                        body: """<p>Security Scan completed. Please find the details below:</p>
-                                <p><strong>Status:</strong> ${currentBuild.currentResult}</p>
-                                <p>See attached logs for more details.</p>""",
-                        mimeType: 'text/html'
-                    )
-                }
+            }
+            post {
+            always {
+                echo 'Sending notification email for Security Scan...'
+                emailext (
+                    to: 'nathanworkman94@gmail.com',
+                    subject: "Jenkins Notification: ${env.JOB_NAME} - ${env.BUILD_NUMBER} - Security Scan Result",
+                    body: """<p>Security Scan completed. Please find the details below:</p>
+                            <p><strong>Status:</strong> ${currentBuild.currentResult}</p>
+                            <p>See attached logs for more details.</p>""",
+                    mimeType: 'text/html'
+                )
             }
         }
+    }
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying to AWS EC2 staging server...'
@@ -122,5 +122,4 @@ pipeline {
             }
         }
     }
-}
 }
