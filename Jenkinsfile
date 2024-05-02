@@ -34,11 +34,13 @@ pipeline {
                 echo 'Unit and integration tests completed'
             }
             post {
-                success {
+                always {
                     echo 'Attempting to send a basic notification email for Security Scan...'
-                    mail to: "nathanworkman94@gmail.com",
-                    subject: "Build status email"
-                    body: "Build successful!
+                    emailext 
+                        to: 'nathanworkman94@gmail.com',
+                        subject: "Simple Test: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                        body: "A simple test email to check connectivity issues.",
+                        mimeType: 'text/plain'
                 }
             }
         }
