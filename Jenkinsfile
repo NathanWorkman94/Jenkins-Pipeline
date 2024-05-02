@@ -35,13 +35,15 @@ pipeline {
             }
             post {
                 success {
-                    echo 'Attempting to send a basic notification email for Security Scan...'
-                    mail to: "nathanworkman94@gmail.com",
-                    subject: "Simple Test: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
-                    body: "Simple test email to check connectivity issues.",
-                   }
+                    emailext(
+                        to: 'nathanworkman94@gmail.com',
+                        subject: "Simple Test: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
+                        body: "Simple test email to check connectivity issues.",
+                        mimeType: 'text/plain'
+                    )
                 }
             }
+        }
         stage('Code Analysis') {
             steps {
                 echo 'Starting Code Analysis using SonarQube...'
@@ -64,13 +66,13 @@ pipeline {
             post {
             always {
                 echo 'Sending notification email for Security Scan...'
-                emailext (
-                    to: 'nathanworkman94@gmail.com',
-                    subject: "Jenkins Notification: ${env.JOB_NAME} - ${env.BUILD_NUMBER} - Security Scan Result",
-                    body: """<p>Security Scan completed. Please find the details below:</p>
-                            <p><strong>Status:</strong> ${currentBuild.currentResult}</p>
-                            <p>See attached logs for more details.</p>""",
-                    mimeType: 'text/html'
+                // emailext (
+                    // to: 'nathanworkman94@gmail.com',
+                    // subject: "Jenkins Notification: ${env.JOB_NAME} - ${env.BUILD_NUMBER} - Security Scan Result",
+                    // body: """<p>Security Scan completed. Please find the details below:</p>
+                            // <p><strong>Status:</strong> ${currentBuild.currentResult}</p>
+                            // <p>See attached logs for more details.</p>""",
+                    // mimeType: 'text/html'
                 )
             }
         }
