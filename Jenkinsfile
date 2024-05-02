@@ -39,7 +39,7 @@ pipeline {
                     mail to: "nathanworkman94@gmail.com",
                     subject: "Simple Test: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
                     body: "Simple test email to check connectivity issues.",
-                    )
+                   }
                 }
             }
         stage('Code Analysis') {
