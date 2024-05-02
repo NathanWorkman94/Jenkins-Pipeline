@@ -36,11 +36,9 @@ pipeline {
             post {
                 always {
                     echo 'Attempting to send a basic notification email for Security Scan...'
-                    emailext 
-                        to: 'nathanworkman94@gmail.com',
-                        subject: "Simple Test: ${env.JOB_NAME} - ${env.BUILD_NUMBER}",
-                        body: "A simple test email to check connectivity issues.",
-                        mimeType: 'text/plain'
+                    emailext body: 'Test Message',
+                        subject: 'Test Subject',
+                        to: 'test@example.com'
                 }
             }
         }
