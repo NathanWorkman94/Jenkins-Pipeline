@@ -42,7 +42,6 @@ pipeline {
                     )
                 }
             }
-        }
         stage('Code Analysis') {
             steps {
                 echo 'Starting Code Analysis using SonarQube...'
