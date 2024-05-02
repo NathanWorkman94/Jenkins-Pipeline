@@ -35,10 +35,15 @@ pipeline {
             }
             post {
                 always {
-                    echo 'Attempting to send a basic notification email for Security Scan...'
-                    emailext body: 'Test Message',
-                        subject: 'Test Subject',
-                        to: 'clairebarleym@gmail.com'
+                    echo 'Sending notification email for Unit and Integration Tests...'
+                    emailext (
+                        to: 'nathanworkman94@gmail.com',
+                        subject: "Jenkins Notification: ${env.JOB_NAME} - ${env.BUILD_NUMBER} - Unit and Integration Test Results",
+                        body: """<p>Unit and Integration Tests completed. Please find the details below:</p>
+                                <p><strong>Status:</strong> ${currentBuild.currentResult}</p>
+                                <p>See attached logs for more details.</p>""",
+                        mimeType: 'text/html'
+                    )
                 }
             }
         }
