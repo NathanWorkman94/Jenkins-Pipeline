@@ -38,7 +38,7 @@ pipeline {
                     echo 'Attempting to send a basic notification email for Security Scan...'
                     emailext body: 'Test Message',
                         subject: 'Test Subject',
-                        to: 'test@example.com'
+                        to: 'nathanworkman94@gmail.com'
                 }
             }
         }
